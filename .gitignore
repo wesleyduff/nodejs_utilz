@@ -1,0 +1,21 @@
+node_modules
+package-lock.json
+
+*.tar
+
+# ide
+.idea
+.idea/*
+
+.DS_Store
+*/.DS_Store
+
+coverage
+coverage/*
+
+
+dockerImages
+dockerIages/*
+
+logs
+logs/*
