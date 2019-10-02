@@ -1,8 +1,0 @@
-{
-  "name": "raven-ms-logger",
-  "main": "index.mjs",
-  "dependencies": {
-    "format": "^0.2.2",
-    "winston": "^3.2.1"
-  }
-}
