@@ -13,7 +13,7 @@ if (environment !== 'start' && environment !== 'test') {
     logPath = '/data/logs';
 }
 
-export default (config, loggerName = 'RavenLogger') => {
+export default config => {
     const desiredFormatForLogs = printf(({ level, message, label, timestamp, details }) => {
         let returnString = `[${timestamp}] :: ${level} => [${label}] :: ${message} `;
         if(details){
@@ -58,7 +58,7 @@ export default (config, loggerName = 'RavenLogger') => {
         }));
     }
 
-    global.LoggerName = loggerName;
-    global[loggerName] = defaultLogger;
+    global.RavenLogger = defaultLogger;
+    return defaultLogger;
 }
 

@@ -1,4 +1,5 @@
 import * as errors from "../errors";
+import mongo from 'mongodb';
 
 export default {
     /**
@@ -28,7 +29,7 @@ export default {
      * @param facade
      * @return an ObjectID of the passed in ID type
      */
-    validateBuildByIDParameters: (ID, facade) => {
+    validateBuildByIDParameters: ID => {
         if (!ID) {
             throw new errors.IncorrectParametersError('No parameters were provided', 'Utilities -> validateBuildByParameters');
         } else if (ID.constructor.name !== 'ObjectID') {
@@ -37,14 +38,11 @@ export default {
                 throw new Error('ID must be a valid string to convert into an ObjectID')
             } else {
                 try {
-                    ID = ObjectID(ID);
+                    ID = mongo.ObjectID(ID);
                 } catch (exception) {
                     throw new errors.ObjectIDCreationError(`Could not create an ObjectID from : ${ID}`, 'validateBuildByIDParameters');
                 }
             }
-        }
-        if (!facade || facade.constructor.name !== 'StockFacade') {
-            throw new Error('Parameter for facade was not provided or was incorrect')
         }
 
         return ID;

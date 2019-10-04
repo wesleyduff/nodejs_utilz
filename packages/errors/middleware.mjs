@@ -2,7 +2,7 @@ import CONSTANTS from '../CONSTANTS';
 import { inspect } from 'util';
 
 export default (exception, req, res, next) => {
-    global['LoggerName'].error(`${exception.constructor.name} : Error`,{
+    RavenLogger.error(`${exception.constructor.name} : Error`,{
         caller: exception.caller ? exception.caller : 'errors/middleware.mjs',
         message: exception.message
             ? `${exception.message}: ${inspect(exception)}`
@@ -46,6 +46,15 @@ export default (exception, req, res, next) => {
                     errorCode: 'RMS003',
                     reason: 'The response to your DB inquery has returned zero results',
                     message: exception.message ? exception.message : 'The response to your DB inquery has returned zero results'
+                }
+            });
+        case CONSTANTS.ERROR_BAD_DATA:
+            return res.status(400).json({
+                status: 400,
+                details: {
+                    errorCode: 'RMS001',
+                    reason: 'Your request was malformed',
+                    message: exception.message ? exception.message : 'The payload provided to the service is incorrect.'
                 }
             });
         case CONSTANTS.ERROR_OBJECT_ID_CREATION:
