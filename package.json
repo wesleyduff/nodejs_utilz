@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "format": "^0.2.2",
+    "mongodb": "^3.3.2",
     "winston": "^3.2.1"
   },
   "devDependencies": {
