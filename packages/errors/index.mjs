@@ -1,13 +1,13 @@
 export { default as IncorrectParametersError } from './IncorrectParametersError';
 export { default as ObjectIDCreationError } from './ObjectIDCreationError';
 export { default as InvalidTypeError } from './InvalidTypeError';
-export { default as EmptyResponseError } from './EmptyResponse';
+export { default as EmptyResponseError } from './EmptyResponseError';
 export { default as DatabaseError } from './DatabaseError';
-export { default as ConditionNotMetError } from './DatabaseError';
+export { default as ConditionNotMetError } from './ConditionNotMetError';
 export { default as BaseError } from './BaseError';
 export { default as RequestError } from './RequestError';
 export { default as ParseError } from './ParseError';
 export { default as ProjectAndCheckError } from './ProjectAndCheckError';
 export { default as NotFoundError } from './NotFoundError';
 export { default as BadDataError } from './BadDataError';
-export { default as middleware } from './middleware.mjs';
+export { default as middleware } from './middleware';

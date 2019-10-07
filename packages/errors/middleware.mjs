@@ -40,17 +40,10 @@ export default (exception, req, res, next) => {
                 }
             });
         case CONSTANTS.ERROR_EMPTY_RESPONSE:
-            return res.status(204).json({
-                status: 204,
-                details: {
-                    errorCode: 'RMS003',
-                    reason: 'The response to your DB inquery has returned zero results',
-                    message: exception.message ? exception.message : 'The response to your DB inquery has returned zero results'
-                }
-            });
+            return res.status(204);
         case CONSTANTS.ERROR_BAD_DATA:
-            return res.status(400).json({
-                status: 400,
+            return res.status(422).json({
+                status: 422,
                 details: {
                     errorCode: 'RMS001',
                     reason: 'Your request was malformed',
