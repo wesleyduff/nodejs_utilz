@@ -1,7 +1,6 @@
 export { default as IncorrectParametersError } from './IncorrectParametersError';
 export { default as ObjectIDCreationError } from './ObjectIDCreationError';
 export { default as InvalidTypeError } from './InvalidTypeError';
-export { default as EmptyResponseError } from './EmptyResponseError';
 export { default as DatabaseError } from './DatabaseError';
 export { default as ConditionNotMetError } from './ConditionNotMetError';
 export { default as BaseError } from './BaseError';
