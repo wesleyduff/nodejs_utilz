@@ -39,8 +39,6 @@ export default (exception, req, res, next) => {
                     message: exception.message ? exception.message : 'The database failed to perform the task applied'
                 }
             });
-        case CONSTANTS.ERROR_EMPTY_RESPONSE:
-            return res.status(204);
         case CONSTANTS.ERROR_BAD_DATA:
             return res.status(422).json({
                 status: 422,
@@ -54,16 +52,16 @@ export default (exception, req, res, next) => {
             return res.status(422).json({
                 status: 422,
                 details: {
-                    errorCode: 'RMS001',
+                    errorCode: 'RMS002',
                     reason: 'Failed to convert provided ID into a type of ObjectID',
                     message: exception.message ? exception.message : 'Could not convert provided ID into ObjectID'
                 }
             });
-        case CONSTANTS.ERROR_INCORRECT_PARAMTERS:
+        case CONSTANTS.ERROR_INCORRECT_PARAMETERS:
             return res.status(422).json({
                 status: 422,
                 details: {
-                    errorCode: 'RMS002',
+                    errorCode: 'RMS003',
                     reason: 'Missing mandatory field',
                     message: exception.message ? exception.message : 'Provided parameters did not meet minimum required parameters'
                 }
