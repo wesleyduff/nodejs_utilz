@@ -85,6 +85,20 @@ export default (exception, req, res, next) => {
                 }
             });
     }
+
+    // Express Errors
+    if(exception instanceof SyntaxError) {
+        return res.status(400).json({
+            status: 400,
+            details: {
+                errorCode: 'RMS006',
+                reason: 'Invalid Body',
+                message: exception.message || 'Invalid Body',
+            }
+        });
+    }
+
+    // Catch all
     res.status(500).json({
         status: 500,
         details: {
