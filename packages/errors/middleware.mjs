@@ -2,7 +2,7 @@ import CONSTANTS from '../CONSTANTS';
 import { inspect } from 'util';
 
 export default (exception, req, res, next) => {
-    RavenLogger.error(`${exception.constructor.name} : Error`,{
+    RavenUtilsLogger.error(`${exception.constructor.name} : Error`,{
         caller: exception.caller ? exception.caller : 'errors/middleware.mjs',
         message: exception.message
             ? `${exception.message}: ${inspect(exception)}`

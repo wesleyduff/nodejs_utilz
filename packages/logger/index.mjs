@@ -58,7 +58,7 @@ export default config => {
         }));
     }
 
-    global.RavenLogger = defaultLogger;
+    global.RavenUtilsLogger = defaultLogger;
     return defaultLogger;
 }
 
