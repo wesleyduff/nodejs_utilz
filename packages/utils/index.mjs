@@ -1,4 +1,5 @@
 import * as errors from "../errors";
+import momentTZ from 'moment-timezone';
 
 export default {
     /**
@@ -56,6 +57,13 @@ export default {
      * @return {Date}
      */
     getTimeStamp: (date = new Date()) => new Date(date),
+
+    /**
+     * Get timestamp via Moment w/ timezone
+     */
+    getTimeZoneMomentTimeStamp: (timeZone = "America/Los_Angeles") => {
+        return momentTZ().tz(timeZone).format();
+    },
 
     /**
      * Chunk an array into multiple chunks of 100 items.
