@@ -2,7 +2,7 @@ import CONSTANTS from '../CONSTANTS';
 import { inspect } from 'util';
 
 export default (exception, req, res, next) => {
-    global['LoggerName'].error(`${exception.constructor.name} : Error`,{
+    RavenUtilsLogger.error(`${exception.constructor.name} : Error`,{
         caller: exception.caller ? exception.caller : 'errors/middleware.mjs',
         message: exception.message
             ? `${exception.message}: ${inspect(exception)}`
@@ -39,29 +39,38 @@ export default (exception, req, res, next) => {
                     message: exception.message ? exception.message : 'The database failed to perform the task applied'
                 }
             });
-        case CONSTANTS.ERROR_EMPTY_RESPONSE:
-            return res.status(204).json({
-                status: 204,
+        case CONSTANTS.ERROR_BAD_DATA:
+            return res.status(422).json({
+                status: 422,
                 details: {
-                    errorCode: 'RMS003',
-                    reason: 'The response to your DB inquery has returned zero results',
-                    message: exception.message ? exception.message : 'The response to your DB inquery has returned zero results'
+                    errorCode: 'RMS001',
+                    reason: 'Your request was malformed',
+                    message: exception.message ? exception.message : 'The payload provided to the service is incorrect.'
+                }
+            });
+        case CONSTANTS.ERROR_BAD_DATA:
+            return res.status(400).json({
+                status: 400,
+                details: {
+                    errorCode: 'RMS001',
+                    reason: 'Your request was malformed',
+                    message: exception.message ? exception.message : 'The payload provided to the service is incorrect.'
                 }
             });
         case CONSTANTS.ERROR_OBJECT_ID_CREATION:
             return res.status(422).json({
                 status: 422,
                 details: {
-                    errorCode: 'RMS001',
+                    errorCode: 'RMS002',
                     reason: 'Failed to convert provided ID into a type of ObjectID',
                     message: exception.message ? exception.message : 'Could not convert provided ID into ObjectID'
                 }
             });
-        case CONSTANTS.ERROR_INCORRECT_PARAMTERS:
+        case CONSTANTS.ERROR_INCORRECT_PARAMETERS:
             return res.status(422).json({
                 status: 422,
                 details: {
-                    errorCode: 'RMS002',
+                    errorCode: 'RMS003',
                     reason: 'Missing mandatory field',
                     message: exception.message ? exception.message : 'Provided parameters did not meet minimum required parameters'
                 }
@@ -76,6 +85,20 @@ export default (exception, req, res, next) => {
                 }
             });
     }
+
+    // Express Errors
+    if(exception instanceof SyntaxError) {
+        return res.status(400).json({
+            status: 400,
+            details: {
+                errorCode: 'RMS006',
+                reason: 'Invalid Body',
+                message: exception.message || 'Invalid Body',
+            }
+        });
+    }
+
+    // Catch all
     res.status(500).json({
         status: 500,
         details: {
