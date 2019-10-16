@@ -60,7 +60,7 @@ export default {
      * Get timestamp via Moment w/ timezone
      */
     getTimeZoneMomentTimeStamp: (timeZone = "America/Los_Angeles") => {
-        return momentTZ().tz(timeZone).format();
+        return momentTZ().tz(timeZone).toDate();
     },
 
     /**
