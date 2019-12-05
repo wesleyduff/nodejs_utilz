@@ -4,13 +4,33 @@ Contains base packages for Raven 2.0 Microservices
 
 ## Raven Microservice Runner
 
-### Install
-`npm install`
 
-### Run
-`npm start`
+### Logging 
+IMPORTANT ... create a folder in this location 
+`/data/logs` 
+Only if you are not running locally on your machine. 
+If local, log path will be /logs on the root level of your application. 
 
-### Usage
+A config is required to be passed in. The only required item in the config is "service" this is the name of the application you are building.
+
+Example: 
+```
+{ service : "My awesome app" }
+```
+
+Next, you need to instantiate the logger on the global object.
+
+Example: 
+```
+//initiate logger : set global logger
+global.MyCustomLogger = logger(config);
+
+```
+
+Make sure to add that nugget before you use it.
+
+
+### Error Handling and Status Response from Express Routes
 express routes: 
 ```
 import { msUtils } from 'raven-ms-utils';
