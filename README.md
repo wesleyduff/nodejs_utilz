@@ -29,6 +29,13 @@ global.MyCustomLogger = logger(config);
 
 Make sure to add that nugget before you use it.
 
+Usage: 
+```
+MyCustomLogger.debug(`DEBUGGING : Hello ${myVariable}, im debugging you`)
+MyCustomLogger.info(`...`);
+MyCustomLogger.error(`ERROR : WARNING : FIX ME .. this is why : error = ${util.inspect(error)}`) //if you do this dont forget to add "import util from 'utils'" at the top of your file. 
+```
+
 
 ### Error Handling and Status Response from Express Routes
 express routes: 
